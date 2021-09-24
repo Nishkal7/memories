@@ -3,7 +3,7 @@ import {Text, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import MemoryLaneLogo from '../Public/Images/MemoryLaneLogo.png';
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -15,7 +15,9 @@ const Login = () => {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity activeOpacity={0.8} style={styles.button1}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.button1} 
+        onPress={() => navigation.navigate('Signup')}
+        >
           <Text style={styles.buttonText}>Create an Account</Text>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.8} style={styles.button2}>
