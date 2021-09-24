@@ -1,1 +1,1 @@
-# Memories
+# Memories - React Native Application
