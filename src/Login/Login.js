@@ -15,20 +15,28 @@ const Login = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity activeOpacity={0.8} style={styles.button1} 
-        onPress={() => navigation.navigate('Signup')}
-        >
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.button1}
+          onPress={() => navigation.navigate('Signup')}>
           <Text style={styles.buttonText}>Create an Account</Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.button2}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.button2}
+          onPress={() => navigation.navigate('Signin')}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>{"By Creating an Account you agree to our Terms & Conditions and Privacy Policy."}</Text>
+        <Text style={styles.footerText}>
+          {
+            'By Creating an Account you agree to our Terms & Conditions and Privacy Policy.'
+          }
+        </Text>
       </View>
       <View style={styles.lastFooterContainer}>
-        <Text style={styles.lastFooterText}>{"Created by Nishkal"}</Text>
+        <Text style={styles.lastFooterText}>{'Created by Nishkal'}</Text>
       </View>
     </View>
   );
