@@ -2,8 +2,15 @@ import React from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import MemoryLaneLogo from '../Public/Images/MemoryLaneLogo.png';
+import {login} from '../actions/login';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Login = ({navigation}) => {
+  const dispatch = useDispatch();
+  const stateData = useSelector(state => state);
+
+  console.log('STATE_DATA', stateData);
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -24,7 +31,10 @@ const Login = ({navigation}) => {
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.button2}
-          onPress={() => navigation.navigate('Signin')}>
+          onPress={() => {
+            dispatch(login);
+            navigation.navigate('Signin');
+          }}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
