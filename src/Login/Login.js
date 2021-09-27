@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import MemoryLaneLogo from '../Public/Images/MemoryLaneLogo.png';
-import {login} from '../actions/login';
+import {signin} from '../actions/login';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Login = ({navigation}) => {
@@ -32,7 +32,7 @@ const Login = ({navigation}) => {
           activeOpacity={0.8}
           style={styles.button2}
           onPress={() => {
-            dispatch(login);
+            dispatch(signin);
             navigation.navigate('Signin');
           }}>
           <Text style={styles.buttonText}>Login</Text>

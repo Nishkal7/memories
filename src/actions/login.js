@@ -1,4 +1,4 @@
-export const login = async (dispatch) => {
+export const signin = async (dispatch) => {
   try {
     // dispatch({type: START_LOADING});
     // const {data} = await api.fetchPost(id);
