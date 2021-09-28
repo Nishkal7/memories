@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import styles from './styles';
 
 const Signup = () => {
@@ -18,9 +19,10 @@ const Signup = () => {
     password: '',
     repeatPassword: '',
   };
-  // clean spaces, if anything empty throw alert error, passwords both should match, email regex
 
   const [formData, setFormData] = useState(initialState);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [toggleAlert, setToggleAlert] = useState(false);
 
   const cleanData = data => {
     let transformedData = {
@@ -33,16 +35,67 @@ const Signup = () => {
     validateData(transformedData);
   };
 
-  const validateData = (data) => {
-    // if(!data.firstName.length > 0)
-  }
+  const validateEmail = email => {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
 
-  const alertHandler = message => {
-    Alert.alert('Error', 'message');
+  const validateData = data => {
+    console.log('ALERT VALU&E', toggleAlert);
+    if (
+      !data.firstName.length > 0 ||
+      !data.lastName.length > 0 ||
+      !data.email.length > 0 ||
+      !data.password.length > 0 ||
+      !data.repeatPassword.length > 0
+    ) {
+      setErrorMessage('Please enter all the fields');
+      setToggleAlert(true);
+    } else if (!validateEmail(data.email)) {
+      setErrorMessage('Please enter Valid Email');
+      setToggleAlert(true);
+    } else if (data.password !== data.repeatPassword) {
+      setErrorMessage('Passwords does not match, Please check and try again');
+      setToggleAlert(true);
+    } else if (data.password.length < 7) {
+      setErrorMessage('Password length should be atleast 7');
+      setToggleAlert(true);
+    } else {
+      setErrorMessage('');
+      setToggleAlert(false);
+    }
+  };
+
+  const AlertHandler = ({message}) => {
+    return (
+      <AwesomeAlert
+        show={toggleAlert}
+        showProgress={false}
+        title="Oops! Something went wrong!"
+        message={message}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={true}
+        onDismiss={() => {
+          setToggleAlert(false);
+        }}
+        showCancelButton={false}
+        showConfirmButton={true}
+        cancelText="cancel"
+        confirmText="Okay"
+        confirmButtonColor="#9E7E85"
+        onCancelPressed={() => {
+          setToggleAlert(false);
+        }}
+        onConfirmPressed={() => {
+          setToggleAlert(false);
+        }}
+      />
+    );
   };
 
   return (
     <View style={styles.container}>
+      <AlertHandler message={errorMessage} />
       <View style={styles.inputViewContainer}>
         <Text style={styles.inputText}>First Name</Text>
         <TextInput
