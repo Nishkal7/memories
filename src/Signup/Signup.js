@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
-import AwesomeAlert from 'react-native-awesome-alerts';
 import styles from './styles';
+import AlertModal from '../utils/AlertModal';
 
 const Signup = () => {
   const initialState = {
@@ -41,7 +41,6 @@ const Signup = () => {
   };
 
   const validateData = data => {
-    console.log('ALERT VALU&E', toggleAlert);
     if (
       !data.firstName.length > 0 ||
       !data.lastName.length > 0 ||
@@ -66,36 +65,15 @@ const Signup = () => {
     }
   };
 
-  const AlertHandler = ({message}) => {
-    return (
-      <AwesomeAlert
-        show={toggleAlert}
-        showProgress={false}
-        title="Oops! Something went wrong!"
-        message={message}
-        closeOnTouchOutside={true}
-        closeOnHardwareBackPress={true}
-        onDismiss={() => {
-          setToggleAlert(false);
-        }}
-        showCancelButton={false}
-        showConfirmButton={true}
-        cancelText="cancel"
-        confirmText="Okay"
-        confirmButtonColor="#9E7E85"
-        onCancelPressed={() => {
-          setToggleAlert(false);
-        }}
-        onConfirmPressed={() => {
+  return (
+    <View style={styles.container}>
+      <AlertModal
+        message={errorMessage}
+        activeStatus={toggleAlert}
+        closeModal={() => {
           setToggleAlert(false);
         }}
       />
-    );
-  };
-
-  return (
-    <View style={styles.container}>
-      <AlertHandler message={errorMessage} />
       <View style={styles.inputViewContainer}>
         <Text style={styles.inputText}>First Name</Text>
         <TextInput
@@ -163,7 +141,6 @@ const Signup = () => {
           activeOpacity={0.8}
           style={styles.button1}
           onPress={() => {
-            console.log('FORM DATA CHECK', formData);
             cleanData(formData);
           }}>
           <Text style={styles.buttonText}>Create an Account</Text>
