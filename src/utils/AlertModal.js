@@ -6,7 +6,7 @@ const AlertModal = ({message, activeStatus, closeModal}) => {
     <AwesomeAlert
       show={activeStatus}
       showProgress={false}
-      title="Oops! Something went wrong!"
+      title="Something went wrong!"
       message={message}
       closeOnTouchOutside={true}
       closeOnHardwareBackPress={true}

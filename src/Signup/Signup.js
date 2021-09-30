@@ -54,7 +54,7 @@ const Signup = () => {
       setErrorMessage('Please enter Valid Email');
       setToggleAlert(true);
     } else if (data.password !== data.repeatPassword) {
-      setErrorMessage('Passwords does not match, Please check and try again');
+      setErrorMessage('Passwords do not match, Please try again');
       setToggleAlert(true);
     } else if (data.password.length < 7) {
       setErrorMessage('Password length should be atleast 7');

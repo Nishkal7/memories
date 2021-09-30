@@ -9,8 +9,12 @@ import {
 } from 'react-native';
 import styles from './styles';
 import AlertModal from '../utils/AlertModal';
+import {signin} from '../actions/login';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Signin = ({navigation}) => {
+  const dispatch = useDispatch();
+  const stateData = useSelector(state => state);
   const initialState = {
     email: '',
     password: '',
@@ -43,6 +47,7 @@ const Signin = ({navigation}) => {
     } else {
       setErrorMessage('');
       setToggleAlert(false);
+      dispatch(signin);
     }
   };
 
