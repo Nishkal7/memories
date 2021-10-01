@@ -2,12 +2,12 @@ import React from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import MemoryLaneLogo from '../Public/Images/MemoryLaneLogo.png';
-
+import * as Animatable from 'react-native-animatable';
 const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logoImage} source={MemoryLaneLogo} />
+        <Animatable.Image animation="bounceIn" duration={2000} style={styles.logoImage} source={MemoryLaneLogo} />
       </View>
       <View style={styles.sloganContainer}>
         <Text style={styles.sloganText}>
@@ -19,7 +19,7 @@ const Login = ({navigation}) => {
           activeOpacity={0.8}
           style={styles.button1}
           onPress={() => navigation.navigate('Signup')}>
-          <Text style={styles.buttonText}>Create an Account</Text>
+          <Animatable.Text animation="fadeInUp" duration={1000} style={styles.buttonText}>Create an Account</Animatable.Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -27,7 +27,7 @@ const Login = ({navigation}) => {
           onPress={() => {
             navigation.navigate('Signin');
           }}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Animatable.Text animation="fadeInUp" duration={1000} style={styles.buttonText}>Login</Animatable.Text>
         </TouchableOpacity>
       </View>
       <View style={styles.footerContainer}>
