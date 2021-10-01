@@ -10,16 +10,16 @@ const Login = ({navigation}) => {
         <Animatable.Image animation="bounceIn" duration={2000} style={styles.logoImage} source={MemoryLaneLogo} />
       </View>
       <View style={styles.sloganContainer}>
-        <Text style={styles.sloganText}>
+        <Animatable.Text animation="fadeInDown" duration={1000} style={styles.sloganText}>
           {'Enjoy your trip down memory lane!'}
-        </Text>
+        </Animatable.Text>
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.button1}
           onPress={() => navigation.navigate('Signup')}>
-          <Animatable.Text animation="fadeInUp" duration={1000} style={styles.buttonText}>Create an Account</Animatable.Text>
+          <Animatable.Text animation="fadeInUp" duration={800} style={styles.buttonText}>Create an Account</Animatable.Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -27,18 +27,18 @@ const Login = ({navigation}) => {
           onPress={() => {
             navigation.navigate('Signin');
           }}>
-          <Animatable.Text animation="fadeInUp" duration={1000} style={styles.buttonText}>Login</Animatable.Text>
+          <Animatable.Text animation="fadeInUp" duration={800} style={styles.buttonText}>Login</Animatable.Text>
         </TouchableOpacity>
       </View>
       <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>
+        <Animatable.Text animation="fadeInLeft" duration={1000} style={styles.footerText}>
           {
             'By Creating an Account you agree to our Terms & Conditions and Privacy Policy.'
           }
-        </Text>
+        </Animatable.Text>
       </View>
       <View style={styles.lastFooterContainer}>
-        <Text style={styles.lastFooterText}>{'Created by Nishkal'}</Text>
+        <Animatable.Text animation="fadeInRight" duration={1000} style={styles.lastFooterText}>{'Created by Nishkal'}</Animatable.Text>
       </View>
     </View>
   );
