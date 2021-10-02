@@ -5,7 +5,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
   /* <Loader  activeStatus={toggleAlert}/>   - Import and use it in required places */
 }
 
-const AlertModal = ({activeStatus, closeModal}) => {
+const AlertModal = ({activeStatus}) => {
   return (
     <AwesomeAlert
       show={activeStatus}

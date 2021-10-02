@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import AlertModal from '../utils/AlertModal';
+import Loader from '../utils/Loader';
 import {signin} from '../actions/login';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -23,6 +24,7 @@ const Signin = ({navigation}) => {
   const [formData, setFormData] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
   const [toggleAlert, setToggleAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const cleanData = data => {
     let transformedData = {
@@ -47,12 +49,14 @@ const Signin = ({navigation}) => {
     } else {
       setErrorMessage('');
       setToggleAlert(false);
-      dispatch(signin);
+      setLoading(true)
+      dispatch(signin(1));
     }
   };
 
   return (
     <View style={styles.container}>
+      <Loader activeStatus={loading}/>
       <AlertModal
         message={errorMessage}
         activeStatus={toggleAlert}
