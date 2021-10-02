@@ -17,10 +17,9 @@ const Home = () => {
     if (posts?.currentPage == 1) {
       setPostsData(posts.data);
     } else if (posts?.currentPage > 1) {
-    Array.prototype.push.apply(postsData, posts?.data);
-    setPostsData(postsData);
+      Array.prototype.push.apply(postsData, posts?.data);
+      setPostsData(postsData);
     }
-    console.log("dfsf",postsData)
   }, [posts]);
 
   const renderItem = ({item}) => (
@@ -44,7 +43,7 @@ const Home = () => {
         data={postsData}
         renderItem={renderItem}
         keyExtractor={item => item._id}
-        onEndReachedThreshold={0.9}
+        onEndReachedThreshold={0.1}
         onEndReached={posts?.numberOfPages != pageNumber ? loadPosts : null}
       />
     </View>
