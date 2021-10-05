@@ -12,6 +12,8 @@ import AlertModal from '../utils/AlertModal';
 import Loader from '../utils/Loader';
 import {signin} from '../actions/login';
 import {useSelector, useDispatch} from 'react-redux';
+import * as Constants from '../utils/Constants';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Signin = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const Signin = ({navigation}) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [toggleAlert, setToggleAlert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const cleanData = data => {
     let transformedData = {
@@ -78,16 +81,25 @@ const Signin = ({navigation}) => {
       </View>
       <View style={styles.inputViewContainer}>
         <Text style={styles.inputText}>Password</Text>
-        <TextInput
-          secureTextEntry={true}
-          name="Password"
-          type="text"
-          style={styles.boxContainer}
-          value={formData.password}
-          onChangeText={value => {
-            setFormData({...formData, password: value});
-          }}
-        />
+        <View style={styles.passwordViewContainer}>
+          <TextInput
+            secureTextEntry={hidePassword}
+            name="Password"
+            type="text"
+            style={styles.boxContainerPassword}
+            value={formData.password}
+            onChangeText={value => {
+              setFormData({...formData, password: value});
+            }}
+          />
+          <MaterialCommunityIcons
+            name={!hidePassword ? 'eye' : 'eye-off'}
+            color={Constants.APP_THEME_COLOR}
+            style={styles.eyeIcon}
+            size={23}
+            onPress={() => setHidePassword(!hidePassword)}
+          />
+        </View>
       </View>
       <View style={styles.inputViewContainer}>
         <TouchableOpacity

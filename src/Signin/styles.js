@@ -25,6 +25,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     color:"#754752",
   },
+  passwordViewContainer:{
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"center"
+  },
+  boxContainerPassword: {
+    height: 40,
+    borderBottomColor:"#754752",
+    borderBottomWidth: 1,
+    color:"#754752",
+    width:"100%",
+    paddingRight:"12%"
+  },
+  eyeIcon : {
+    position:"absolute",
+    marginLeft:"90%" 
+  },
   button1: {
     height: 35,
     width: '90%',

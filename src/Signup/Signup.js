@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import styles from './styles';
 import AlertModal from '../utils/AlertModal';
+import * as Constants from '../utils/Constants';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Signup = () => {
   const initialState = {
@@ -23,7 +25,8 @@ const Signup = () => {
   const [formData, setFormData] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState('');
   const [toggleAlert, setToggleAlert] = useState(false);
-
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword1, setHidePassword1] = useState(true);
   const cleanData = data => {
     let transformedData = {
       firstName: data.firstName.trim(),
@@ -112,29 +115,47 @@ const Signup = () => {
       </View>
       <View style={styles.inputViewContainer}>
         <Text style={styles.inputText}>Password</Text>
-        <TextInput
-          secureTextEntry={true}
-          name="Password"
-          type="text"
-          style={styles.boxContainer}
-          value={formData.password}
-          onChangeText={value => {
-            setFormData({...formData, password: value});
-          }}
-        />
+        <View style={styles.passwordViewContainer}>
+          <TextInput
+            secureTextEntry={hidePassword}
+            name="Password"
+            type="text"
+            style={styles.boxContainerPassword}
+            value={formData.password}
+            onChangeText={value => {
+              setFormData({...formData, password: value});
+            }}
+          />
+          <MaterialCommunityIcons
+            name={!hidePassword ? 'eye' : 'eye-off'}
+            color={Constants.APP_THEME_COLOR}
+            style={styles.eyeIcon}
+            size={23}
+            onPress={() => setHidePassword(!hidePassword)}
+          />
+        </View>
       </View>
       <View style={styles.inputViewContainer}>
         <Text style={styles.inputText}>Repeat Password</Text>
-        <TextInput
-          secureTextEntry={true}
-          name="Repeat Password"
-          type="text"
-          style={styles.boxContainer}
-          value={formData.repeatPassword}
-          onChangeText={value => {
-            setFormData({...formData, repeatPassword: value});
-          }}
-        />
+        <View style={styles.passwordViewContainer}>
+          <TextInput
+            secureTextEntry={hidePassword1}
+            name="Repeat Password"
+            type="text"
+            style={styles.boxContainerPassword}
+            value={formData.repeatPassword}
+            onChangeText={value => {
+              setFormData({...formData, repeatPassword: value});
+            }}
+          />
+          <MaterialCommunityIcons
+            name={!hidePassword1 ? 'eye' : 'eye-off'}
+            color={Constants.APP_THEME_COLOR}
+            style={styles.eyeIcon}
+            size={23}
+            onPress={() => setHidePassword1(!hidePassword1)}
+          />
+        </View>
       </View>
       <View style={styles.inputViewContainer}>
         <TouchableOpacity
