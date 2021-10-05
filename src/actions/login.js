@@ -1,18 +1,17 @@
-import * as api from "../api/index";
+import * as api from '../api/index';
 
-export const signin = (page) =>  async (dispatch) => {
+export const signin = () => async dispatch => {
   try {
-    // dispatch({type: START_LOADING});
-    const { data } = await api.fetchPosts(page);
+    const {data} = await api.fetchPosts(1);
     dispatch({type: 'LOGIN', payload: data});
   } catch (error) {
     console.log(error);
   }
 };
-export const signout = () =>  async (dispatch) => {
+export const signout = () => async dispatch => {
   try {
-    // dispatch({type: START_LOADING});
     dispatch({type: 'LOGOUT', payload: null});
+    dispatch({type: 'GET_POSTS', payload: null});
   } catch (error) {
     console.log(error);
   }

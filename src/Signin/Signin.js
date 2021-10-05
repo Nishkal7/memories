@@ -53,7 +53,7 @@ const Signin = ({navigation}) => {
       setErrorMessage('');
       setToggleAlert(false);
       setLoading(true)
-      dispatch(signin(1));
+      dispatch(signin());
     }
   };
 
