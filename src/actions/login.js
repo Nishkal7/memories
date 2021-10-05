@@ -9,3 +9,11 @@ export const signin = (page) =>  async (dispatch) => {
     console.log(error);
   }
 };
+export const signout = () =>  async (dispatch) => {
+  try {
+    // dispatch({type: START_LOADING});
+    dispatch({type: 'LOGOUT', payload: null});
+  } catch (error) {
+    console.log(error);
+  }
+};
