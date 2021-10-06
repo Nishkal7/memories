@@ -18,8 +18,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log('stateData', stateData);
-
     if (posts?.data != null) {
       setLoading(false);
     } else {

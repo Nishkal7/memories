@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -12,14 +12,19 @@ import styles from './styles';
 import AlertModal from '../utils/AlertModal';
 import * as Constants from '../utils/Constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {signup, signout} from '../actions/login';
+import {useSelector, useDispatch} from 'react-redux';
+import Loader from '../utils/Loader';
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const stateData = useSelector(state => state);
   const initialState = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    repeatPassword: '',
+    confirmPassword: '',
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -27,16 +32,26 @@ const Signup = () => {
   const [toggleAlert, setToggleAlert] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePassword1, setHidePassword1] = useState(true);
+  const [loading, setLoading] = useState(false);
   const cleanData = data => {
     let transformedData = {
       firstName: data.firstName.trim(),
       lastName: data.lastName.trim(),
       email: data.email.trim(),
       password: data.password,
-      repeatPassword: data.repeatPassword,
+      confirmPassword: data.confirmPassword,
     };
     validateData(transformedData);
   };
+
+  useEffect(() => {
+    if (stateData?.login?.authData == 'Error') {
+      setLoading(false);
+      setErrorMessage('Account creation failed, Please try again');
+      setToggleAlert(true);
+      dispatch(signout());
+    }
+  }, [stateData]);
 
   const validateEmail = email => {
     let re = /\S+@\S+\.\S+/;
@@ -49,14 +64,14 @@ const Signup = () => {
       !data.lastName.length > 0 ||
       !data.email.length > 0 ||
       !data.password.length > 0 ||
-      !data.repeatPassword.length > 0
+      !data.confirmPassword.length > 0
     ) {
       setErrorMessage('Please enter all the fields');
       setToggleAlert(true);
     } else if (!validateEmail(data.email)) {
       setErrorMessage('Please enter Valid Email');
       setToggleAlert(true);
-    } else if (data.password !== data.repeatPassword) {
+    } else if (data.password !== data.confirmPassword) {
       setErrorMessage('Passwords do not match, Please try again');
       setToggleAlert(true);
     } else if (data.password.length < 7) {
@@ -65,11 +80,14 @@ const Signup = () => {
     } else {
       setErrorMessage('');
       setToggleAlert(false);
+      setLoading(true);
+      dispatch(signup(formData));
     }
   };
 
   return (
     <View style={styles.container}>
+      <Loader activeStatus={loading} />
       <AlertModal
         message={errorMessage}
         activeStatus={toggleAlert}
@@ -85,7 +103,7 @@ const Signup = () => {
           style={styles.boxContainer}
           value={formData.firstName}
           onChangeText={value => {
-            setFormData({...formData, firstName: value});
+            setFormData({...formData, firstName: value.trim()});
           }}
         />
       </View>
@@ -97,7 +115,7 @@ const Signup = () => {
           style={styles.boxContainer}
           value={formData.lastName}
           onChangeText={value => {
-            setFormData({...formData, lastName: value});
+            setFormData({...formData, lastName: value.trim()});
           }}
         />
       </View>
@@ -143,9 +161,9 @@ const Signup = () => {
             name="Repeat Password"
             type="text"
             style={styles.boxContainerPassword}
-            value={formData.repeatPassword}
+            value={formData.confirmPassword}
             onChangeText={value => {
-              setFormData({...formData, repeatPassword: value});
+              setFormData({...formData, confirmPassword: value});
             }}
           />
           <MaterialCommunityIcons
@@ -162,7 +180,7 @@ const Signup = () => {
           activeOpacity={0.8}
           style={styles.button1}
           onPress={() => {
-            cleanData(formData);
+            validateData(formData);
           }}>
           <Text style={styles.buttonText}>Create an Account</Text>
         </TouchableOpacity>

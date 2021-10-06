@@ -35,7 +35,7 @@ const Signin = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (stateData?.login.authData == 'Error') {
+    if (stateData?.login?.authData == 'Error') {
       setLoading(false);
       setErrorMessage('Please enter Valid Credentials and try again');
       setToggleAlert(true);
