@@ -14,8 +14,17 @@ function ColdStateNavigator() {
   const loginStatus = useSelector(state => state?.login?.authData);
 
   useEffect(() => {
-    if (loginStatus && loginStatus != null) setIsLoggedIn(true);
-    else setIsLoggedIn(false);
+    console.log('LOGIN STATE DATA', loginStatus);
+    if (
+      loginStatus &&
+      loginStatus != null &&
+      loginStatus?.result &&
+      loginStatus?.token
+    ) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
   });
 
   return (

@@ -1,10 +1,12 @@
 import * as api from '../api/index';
 
-export const signin = () => async dispatch => {
+export const signin = (formData) => async dispatch => {
+  console.log("Incomming Form Data",formData);
   try {
-    const {data} = await api.fetchPosts(1);
+    const {data} = await api.signIn(formData);
     dispatch({type: 'LOGIN', payload: data});
   } catch (error) {
+    dispatch({type: 'LOGIN', payload: "Error"});
     console.log(error);
   }
 };

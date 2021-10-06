@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,7 +10,7 @@ import {
 import styles from './styles';
 import AlertModal from '../utils/AlertModal';
 import Loader from '../utils/Loader';
-import {signin} from '../actions/login';
+import {signin, signout} from '../actions/login';
 import {useSelector, useDispatch} from 'react-redux';
 import * as Constants from '../utils/Constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,18 +29,19 @@ const Signin = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  const cleanData = data => {
-    let transformedData = {
-      email: data.email.trim(),
-      password: data.password,
-    };
-    validateData(transformedData);
-  };
-
   const validateEmail = email => {
     let re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
+
+  useEffect(() => {
+    if (stateData?.login.authData == 'Error') {
+      setLoading(false);
+      setErrorMessage('Please enter Valid Credentials and try again');
+      setToggleAlert(true);
+      dispatch(signout());
+    }
+  }, [stateData]);
 
   const validateData = data => {
     if (!data.email.length > 0 || !data.password.length > 0) {
@@ -52,14 +53,14 @@ const Signin = ({navigation}) => {
     } else {
       setErrorMessage('');
       setToggleAlert(false);
-      setLoading(true)
-      dispatch(signin());
+      setLoading(true);
+      dispatch(signin(formData));
     }
   };
 
   return (
     <View style={styles.container}>
-      <Loader activeStatus={loading}/>
+      <Loader activeStatus={loading} />
       <AlertModal
         message={errorMessage}
         activeStatus={toggleAlert}
@@ -75,7 +76,7 @@ const Signin = ({navigation}) => {
           style={styles.boxContainer}
           value={formData.email}
           onChangeText={value => {
-            setFormData({...formData, email: value});
+            setFormData({...formData, email: value.trim().toLowerCase()});
           }}
         />
       </View>
@@ -106,7 +107,7 @@ const Signin = ({navigation}) => {
           activeOpacity={0.8}
           style={styles.button1}
           onPress={() => {
-            cleanData(formData);
+            validateData(formData);
           }}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>

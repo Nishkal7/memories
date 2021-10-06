@@ -109,7 +109,7 @@ const Signup = () => {
           style={styles.boxContainer}
           value={formData.email}
           onChangeText={value => {
-            setFormData({...formData, email: value});
+            setFormData({...formData, email: value.trim().toLowerCase()});
           }}
         />
       </View>
