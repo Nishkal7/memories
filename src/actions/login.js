@@ -1,16 +1,24 @@
 import * as api from '../api/index';
 
 export const signin = formData => async dispatch => {
+  let transformedFormData = {
+    email: formData.email.toLowerCase(),
+    password: formData.password,
+  };
   try {
-    const {data} = await api.signIn(formData);
+    const {data} = await api.signIn(transformedFormData);
     dispatch({type: 'LOGIN', payload: data});
   } catch (error) {
     dispatch({type: 'LOGIN', payload: 'Error'});
   }
 };
 export const signup = formData => async dispatch => {
+  let transformedFormData = {
+    ...formData,
+    email: formData.email.toLowerCase(),
+  };
   try {
-    const {data} = await api.signUp(formData);
+    const {data} = await api.signUp(transformedFormData);
     dispatch({type: 'LOGIN', payload: data});
   } catch (error) {
     dispatch({type: 'LOGIN', payload: 'Error'});
