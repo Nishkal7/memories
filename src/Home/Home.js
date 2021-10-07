@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, FlatList, Image} from 'react-native';
+import {Text, View, FlatList, Image, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../utils/Loader';
 import {getPosts} from '../actions/posts';
+import moment from "moment";
 import styles from './styles';
 
 const Home = () => {
   const dispatch = useDispatch();
-  let stateData = useSelector(state => state);
+  let stateData = useSelector(state => state); //for checking full global state
   let posts = useSelector(state => state?.posts?.data);
   const [postsData, setPostsData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -34,8 +35,20 @@ const Home = () => {
 
   const renderItem = ({item}) => (
     <View style={styles.itemContainer}>
-      <Text>{item.title}</Text>
-      <Image style={styles.image} source={{uri: item.selectedFile}} />
+      <View style={styles.cardImageContainer}>
+        <ImageBackground
+          style={styles.image}
+          imageStyle={styles.imageStyles}
+          source={{uri: item.selectedFile}}>
+          <View style={styles.imageChild}>
+            <View style={styles.overlayTextContainer}>
+            <Text numberOfLines={1} style={styles.overlayName}>{item.name}</Text>
+            <Text numberOfLines={1} style={styles.overlayDate}>{moment(item.createdAt).fromNow()}</Text>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
+      <View style={styles.cardContentContainer}></View>
     </View>
   );
 
