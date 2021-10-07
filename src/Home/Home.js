@@ -1,9 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, FlatList, Image, ImageBackground} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../utils/Loader';
 import {getPosts} from '../actions/posts';
-import moment from "moment";
+import moment from 'moment';
 import styles from './styles';
 
 const Home = () => {
@@ -35,19 +42,23 @@ const Home = () => {
 
   const renderItem = ({item}) => (
     <View style={styles.itemContainer}>
-      <View style={styles.cardImageContainer}>
+      <TouchableOpacity activeOpacity={0.8} style={styles.cardImageContainer}>
         <ImageBackground
           style={styles.image}
           imageStyle={styles.imageStyles}
           source={{uri: item.selectedFile}}>
           <View style={styles.imageChild}>
             <View style={styles.overlayTextContainer}>
-            <Text numberOfLines={1} style={styles.overlayName}>{item.name}</Text>
-            <Text numberOfLines={1} style={styles.overlayDate}>{moment(item.createdAt).fromNow()}</Text>
+              <Text numberOfLines={1} style={styles.overlayName}>
+                {item.name}
+              </Text>
+              <Text numberOfLines={1} style={styles.overlayDate}>
+                {moment(item.createdAt).fromNow()}
+              </Text>
             </View>
           </View>
         </ImageBackground>
-      </View>
+      </TouchableOpacity>
       <View style={styles.cardContentContainer}></View>
     </View>
   );
