@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import * as Constants from '../utils/Constants';
 
 const styles = StyleSheet.create({
   sloganText: {
-    color: '#754847', //Main Text Color
+    color: Constants.APP_THEME_COLOR, //Main Text Color
     fontFamily: 'serif',
     fontSize: 17,
   },
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     width: '100%',
-    backgroundColor: '#eeebe8', // Back ground color
+    backgroundColor: Constants.APP_BACKGROUND_COLOR, // Back ground color
   },
   logoContainer: {
     height: '40%',
@@ -32,12 +33,12 @@ const styles = StyleSheet.create({
     height: '20%',
     width: '90%',
     borderRadius:20,
-    backgroundColor: '#754752',
+    backgroundColor: Constants.APP_THEME_COLOR,
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   buttonText: {
-      color : '#eeebe8',
+      color : Constants.APP_BACKGROUND_COLOR,
       fontFamily:"serif",
       fontSize:17
   },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     height: '20%',
     width: '90%',
     borderRadius:20,
-    backgroundColor: '#754752',
+    backgroundColor: Constants.APP_THEME_COLOR,
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   footerText : {
     fontFamily: 'serif',
     fontSize: 17,
-    color : '#754847',
+    color : Constants.APP_THEME_COLOR,
     margin:14,
   },
   lastFooterContainer: {
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   lastFooterText : {
     fontFamily: 'serif',
     fontSize: 17,
-    color : '#754847',
+    color : Constants.APP_THEME_COLOR,
   }
 });
 

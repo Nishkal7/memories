@@ -60,43 +60,43 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20,
   },
-  cardContentTitle:{
-    display:"flex",
-    justifyContent:"center",
-    height:30,
-    paddingHorizontal:10
+  cardContentTitle: {
+    display: 'flex',
+    justifyContent: 'center',
+    height: 30,
+    paddingHorizontal: 10,
   },
-  cardContentTitleText:{
+  cardContentTitleText: {
     fontSize: 18,
-    fontWeight:"bold",
-    color:"#585858"
+    fontWeight: 'bold',
+    color: Constants.DARK_GREY,
   },
-  cardContentDesc:{
-    paddingTop:5,
-    paddingBottom:10,
-    display:"flex",
-    justifyContent:"flex-start",
-    paddingHorizontal:10
+  cardContentDesc: {
+    paddingTop: 5,
+    paddingBottom: 10,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 10,
   },
-  cardContentDescText:{
+  cardContentDescText: {
     fontSize: 14,
-    color:"#696969"
+    color: Constants.LIGHT_GREY,
   },
-  cardContentIconsContainer:{
+  cardContentIconsContainer: {
     // backgroundColor:"green",
-    display:"flex",
-    flexDirection:"row",
-    alignItems:"center",
-    justifyContent:"space-between",
-    height:50,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 50,
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20,
-    paddingHorizontal:10
+    paddingHorizontal: 10,
   },
-  cardContentIconsLeftContainer:{
-    display:"flex",
-    flexDirection:"row",
-    alignItems:"center"
-  }
+  cardContentIconsLeftContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
 export default styles;

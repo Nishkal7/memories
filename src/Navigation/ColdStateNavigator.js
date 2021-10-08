@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import * as Constants from '../utils/Constants';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Signin from '../Signin/Signin';
@@ -44,12 +45,12 @@ function ColdStateNavigator() {
               title: 'Sign Up',
               headerTitleAlign: 'center',
               headerStyle: {
-                backgroundColor: '#eeebe8',
+                backgroundColor: Constants.APP_BACKGROUND_COLOR,
                 elevation: 0, // for android
                 shadowOpacity: 0, // for ios
                 borderBottomWidth: 0,
               },
-              headerTintColor: '#754847',
+              headerTintColor: Constants.APP_THEME_COLOR,
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
@@ -69,12 +70,12 @@ function ColdStateNavigator() {
               title: 'Login',
               headerTitleAlign: 'center',
               headerStyle: {
-                backgroundColor: '#eeebe8',
+                backgroundColor: Constants.APP_BACKGROUND_COLOR,
                 elevation: 0, // for android
                 shadowOpacity: 0, // for ios
                 borderBottomWidth: 0,
               },
-              headerTintColor: '#754847',
+              headerTintColor: Constants.APP_THEME_COLOR,
               headerTitleStyle: {
                 fontWeight: 'bold',
               },

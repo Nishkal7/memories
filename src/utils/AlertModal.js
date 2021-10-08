@@ -1,12 +1,13 @@
 import React from 'react';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import * as Constants from "./Constants";
 
 const AlertModal = ({message, activeStatus, closeModal}) => {
   return (
     <AwesomeAlert
       show={activeStatus}
       showProgress={false}
-      title="Something went wrong!"
+      title=""
       message={message}
       closeOnTouchOutside={true}
       closeOnHardwareBackPress={true}
@@ -15,7 +16,7 @@ const AlertModal = ({message, activeStatus, closeModal}) => {
       showConfirmButton={true}
       cancelText="cancel"
       confirmText="Okay"
-      confirmButtonColor="#9E7E85"
+      confirmButtonColor={Constants.ALERT_CONFIRM}
       onCancelPressed={closeModal}
       onConfirmPressed={closeModal}
     />
