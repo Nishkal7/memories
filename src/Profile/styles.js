@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom:30
+    marginBottom:50
   },
   profileLogoutContainer: {
     height: 35,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
     fontSize: 17,
     fontWeight: 'bold',
-    marginRight: 60,
+    marginRight: 66,
   },
   buttonText: {
     color: Constants.APP_BACKGROUND_COLOR,
