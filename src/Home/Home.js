@@ -7,6 +7,8 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import * as Constants from '../utils/Constants';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../utils/Loader';
 import {getPosts} from '../actions/posts';
@@ -20,6 +22,8 @@ const Home = () => {
   const [postsData, setPostsData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [like, setLike] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
 
   useEffect(() => {
     dispatch(getPosts(1));
@@ -40,7 +44,7 @@ const Home = () => {
     }
   }, [posts]);
 
-  const renderItem = ({item}) => (
+  const renderItem = ({item, index}) => (
     <View style={styles.itemContainer}>
       <TouchableOpacity activeOpacity={0.8} style={styles.cardImageContainer}>
         <ImageBackground
@@ -59,7 +63,45 @@ const Home = () => {
           </View>
         </ImageBackground>
       </TouchableOpacity>
-      <View style={styles.cardContentContainer}></View>
+      <View style={styles.cardContentContainer}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.cardContentTitle}>
+          <Text numberOfLines={1} style={styles.cardContentTitleText}>
+            {item.title}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.8} style={styles.cardContentDesc}>
+          <Text numberOfLines={4} style={styles.cardContentDescText}>
+            {item.message}
+          </Text>
+        </TouchableOpacity>
+        <View style={styles.cardContentIconsContainer}>
+          {/* Currently like and bookmark will be applied to all items in the list, this issue will be resolved once the 
+              api functional logic is implemented and we can add condition based on post and user information*/}
+          <View style={styles.cardContentIconsLeftContainer}>
+            <MaterialCommunityIcons
+              name={like ? 'thumb-up' : 'thumb-up-outline'}
+              color={'#585858'}
+              size={25}
+              style={{paddingRight: 15}}
+              onPress={() => setLike(!like)}
+            />
+            <MaterialCommunityIcons
+              name={bookmark ? 'bookmark' : 'bookmark-outline'}
+              color={'#585858'}
+              size={25}
+              onPress={() => setBookmark(!bookmark)}
+            />
+          </View>
+          <View>
+            <MaterialCommunityIcons
+              name="trash-can-outline"
+              color={'#585858'}
+              size={25}
+              style={{paddingRight: 10}}
+            />
+          </View>
+        </View>
+      </View>
     </View>
   );
 

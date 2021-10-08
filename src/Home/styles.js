@@ -34,15 +34,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   imageStyles: {
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   imageChild: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.3)',
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   overlayTextContainer: {
-    marginLeft: 20,
+    marginLeft: 10,
     marginTop: 30,
   },
   overlayName: {
@@ -55,8 +57,46 @@ const styles = StyleSheet.create({
     marginLeft: 1,
   },
   cardContentContainer: {
-    // backgroundColor: 'blue',
-    height: 200,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
   },
+  cardContentTitle:{
+    display:"flex",
+    justifyContent:"center",
+    height:30,
+    paddingHorizontal:10
+  },
+  cardContentTitleText:{
+    fontSize: 18,
+    fontWeight:"bold",
+    color:"#585858"
+  },
+  cardContentDesc:{
+    paddingTop:5,
+    paddingBottom:10,
+    display:"flex",
+    justifyContent:"flex-start",
+    paddingHorizontal:10
+  },
+  cardContentDescText:{
+    fontSize: 14,
+    color:"#696969"
+  },
+  cardContentIconsContainer:{
+    // backgroundColor:"green",
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
+    height:50,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+    paddingHorizontal:10
+  },
+  cardContentIconsLeftContainer:{
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"center"
+  }
 });
 export default styles;
