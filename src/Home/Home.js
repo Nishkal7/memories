@@ -15,7 +15,7 @@ import {getPosts} from '../actions/posts';
 import moment from 'moment';
 import styles from './styles';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const dispatch = useDispatch();
   let stateData = useSelector(state => state); //for checking full global state
   let posts = useSelector(state => state?.posts?.data);
@@ -46,7 +46,10 @@ const Home = () => {
 
   const renderItem = ({item, index}) => (
     <View style={styles.itemContainer}>
-      <TouchableOpacity activeOpacity={0.8} style={styles.cardImageContainer}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.cardImageContainer}
+        onPress={() => navigation.navigate('PostDetail')}>
         <ImageBackground
           style={styles.image}
           imageStyle={styles.imageStyles}
@@ -64,12 +67,18 @@ const Home = () => {
         </ImageBackground>
       </TouchableOpacity>
       <View style={styles.cardContentContainer}>
-        <TouchableOpacity activeOpacity={0.8} style={styles.cardContentTitle}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.cardContentTitle}
+          onPress={() => navigation.navigate('PostDetail')}>
           <Text numberOfLines={1} style={styles.cardContentTitleText}>
             {item.title}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.cardContentDesc}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.cardContentDesc}
+          onPress={() => navigation.navigate('PostDetail')}>
           <Text numberOfLines={4} style={styles.cardContentDescText}>
             {item.message}
           </Text>
