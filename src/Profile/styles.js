@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.APP_BACKGROUND_COLOR,
   },
   profileImageContainer: {
-    height: 230,
+    height: 200,
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
     justifyContent:"space-evenly",
   },
   profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 200 / 2,
+    width: 160,
+    height: 160,
+    borderRadius: 160 / 2,
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: Constants.ALERT_CONFIRM

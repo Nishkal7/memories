@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Constants from '../utils/Constants';
+import HomeNavigator from "./HomeNavigator";
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import Create from '../Create/Create';
@@ -20,8 +21,8 @@ function HotStateNavigator() {
       inactiveColor={Constants.LIGHT_GREY}
       backBehavior="history">
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="HomeNavigator"
+        component={HomeNavigator}
         options={{
           headerShown: false,
           tabBarLabel: 'Home',
