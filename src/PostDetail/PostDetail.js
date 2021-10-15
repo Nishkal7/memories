@@ -3,24 +3,27 @@ import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
 import moment from 'moment';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../utils/Loader';
+import {getPostsBySearch} from '../actions/posts';
 import styles from './styles';
 import * as Animatable from 'react-native-animatable';
 
 const PostDetail = ({route, navigation}) => {
   const {post} = route.params;
-  console.log('ROUTE....', post);
+  const dispatch = useDispatch();
+  let postsList = useSelector(state => state?.posts?.recPosts);
+  let isLoading = useSelector(state => state?.posts?.isLoading);
 
-  // To use original Image sizes
-  // const [imageHeight, setImageHeight] = useState(null);
-  // const [imageWidth, setImageWidth] = useState(null);
+  useEffect(() => {
+    if (post) {
+      dispatch(getPostsBySearch({search: 'none', tags: post?.tags.join(',')}));
+    }
+  }, [post]);
 
-  // Image.getSize(post.selectedFile, (width, height) => {
-  //   setImageHeight(height);
-  //   setImageWidth(width);
-  // });
+  const recommendedPosts = postsList?.data?.filter(({_id}) => _id !== post._id);
 
   return (
     <ScrollView style={styles.postDetailContainer}>
+      <Loader activeStatus={isLoading} />
       <Animatable.View
         animation="slideInDown"
         duration={1000}
@@ -42,7 +45,10 @@ const PostDetail = ({route, navigation}) => {
             contentContainerStyle={styles.tagsContainer}>
             {post?.tags.map((tag, index) => {
               return (
-                <TouchableOpacity style={styles.tags}>
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.5}
+                  style={styles.tags}>
                   <Text style={styles.tagsText}>{tag}</Text>
                 </TouchableOpacity>
               );
@@ -60,9 +66,42 @@ const PostDetail = ({route, navigation}) => {
             {moment(post.createdAt).fromNow()}
           </Text>
         </View>
+        <Text numberOfLines={1} style={styles.postContentRecText}>
+          {'You might also like : '}
+        </Text>
+        <View style={styles.recommendationPostsContainer}>
+          {recommendedPosts &&
+            recommendedPosts?.length > 0 &&
+            recommendedPosts?.map((post, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.imageRecContainer}
+                  onPress={() =>
+                    navigation.push('PostDetail', {
+                      post: post,
+                    })
+                  }>
+                  <Image
+                    style={styles.imageRecView}
+                    source={{uri: post.selectedFile}}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+        </View>
       </Animatable.View>
     </ScrollView>
   );
 };
 
 export default PostDetail;
+
+// To use original Image sizes
+// const [imageHeight, setImageHeight] = useState(null);
+// const [imageWidth, setImageWidth] = useState(null);
+
+// Image.getSize(post.selectedFile, (width, height) => {
+//   setImageHeight(height);
+//   setImageWidth(width);
+// });

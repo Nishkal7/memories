@@ -49,9 +49,11 @@ const Home = ({navigation}) => {
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.cardImageContainer}
-        onPress={() => navigation.navigate('PostDetail',{
-          post : item
-        })}>
+        onPress={() =>
+          navigation.navigate('PostDetail', {
+            post: item
+          })
+        }>
         <ImageBackground
           style={styles.image}
           imageStyle={styles.imageStyles}
@@ -72,9 +74,11 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.cardContentTitle}
-          onPress={() => navigation.navigate('PostDetail',{
-            post : item
-          })}>
+          onPress={() =>
+            navigation.navigate('PostDetail', {
+              post: item
+            })
+          }>
           <Text numberOfLines={1} style={styles.cardContentTitleText}>
             {item.title}
           </Text>
@@ -82,9 +86,11 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.cardContentDesc}
-          onPress={() => navigation.navigate('PostDetail',{
-            post : item
-          })}>
+          onPress={() =>
+            navigation.navigate('PostDetail', {
+              post: item
+            })
+          }>
           <Text numberOfLines={4} style={styles.cardContentDescText}>
             {item.message}
           </Text>

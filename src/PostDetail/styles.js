@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   postDetailContainer: {
     display: 'flex',
-      backgroundColor: Constants.APP_BACKGROUND_COLOR,
+    backgroundColor: Constants.APP_BACKGROUND_COLOR,
   },
   imageContainer: {},
   imageView: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   postContentContainer: {
     backgroundColor: Constants.APP_BACKGROUND_COLOR,
-    marginTop: -15,
+    marginTop: -18,
     paddingTop: 20,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Constants.APP_THEME_COLOR,
   },
-  postContentDate:{
+  postContentDate: {
     fontSize: 14,
     color: Constants.APP_THEME_COLOR,
   },
@@ -55,10 +55,29 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DED9E5',
   },
-  tagsText : {
+  tagsText: {
     fontSize: 14,
-    color:Constants.APP_THEME_COLOR,
-  }
+    color: Constants.APP_THEME_COLOR,
+  },
+  recommendationPostsContainer: {
+    display:"flex",
+    flexDirection:"row",
+    flexWrap:"wrap"
+  },
+  imageRecContainer: {
+      marginLeft:20,
+      marginVertical:10
+  },
+  imageRecView: {
+    height:165,
+    width:165
+  },
+  postContentRecText:{
+    marginLeft:20,
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: Constants.APP_THEME_COLOR,
+  },
 });
 
 export default styles;
