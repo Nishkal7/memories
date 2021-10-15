@@ -66,9 +66,11 @@ const PostDetail = ({route, navigation}) => {
             {moment(post.createdAt).fromNow()}
           </Text>
         </View>
-        <Text numberOfLines={1} style={styles.postContentRecText}>
-          {'You might also like : '}
-        </Text>
+        {recommendedPosts && recommendedPosts?.length > 0 ? (
+          <Text numberOfLines={1} style={styles.postContentRecText}>
+            {'You might also like : '}
+          </Text>
+        ) : null}
         <View style={styles.recommendationPostsContainer}>
           {recommendedPosts &&
             recommendedPosts?.length > 0 &&
@@ -78,7 +80,7 @@ const PostDetail = ({route, navigation}) => {
                   key={index}
                   style={styles.imageRecContainer}
                   onPress={() =>
-                    navigation.push('PostDetail', {
+                    navigation.replace('PostDetail', {
                       post: post,
                     })
                   }>
