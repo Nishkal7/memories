@@ -22,23 +22,19 @@ function HomeNavigator() {
       <Stack.Screen
         name="PostDetail"
         component={PostDetail}
-        options={{
-          headerShown: false,
-        }}
-        // options={{
-        //   title: 'PostDetail',
-        //   headerTitleAlign: 'center',
-        //   headerStyle: {
-        //     backgroundColor: Constants.APP_BACKGROUND_COLOR,
-        //     elevation: 0, // for android
-        //     shadowOpacity: 0, // for ios
-        //     borderBottomWidth: 0,
-        //   },
-        //   headerTintColor: Constants.APP_THEME_COLOR,
-        //   headerTitleStyle: {
-        //     fontWeight: 'bold',
-        //   },
-        // }}
+        options={({navigation, route}) => ({
+          title: route?.params?.post?.title,
+          headerTitleAlign: 'center',
+          headerMode: 'float',
+          headerStyle: {
+            // backgroundColor: Constants.APP_BACKGROUND_COLOR,
+            elevation: 0, // for android
+            shadowOpacity: 0, // for ios
+            borderBottomWidth: 0,
+          },
+          headerTransparent: true,
+          headerTintColor:'#FFFFFF',
+        })}
       />
     </Stack.Navigator>
   );
