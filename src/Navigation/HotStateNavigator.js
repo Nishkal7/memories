@@ -5,6 +5,7 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Constants from '../utils/Constants';
 import HomeNavigator from "./HomeNavigator";
+import SearchNavigator from "./SearchNavigator";
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import Create from '../Create/Create';
@@ -32,8 +33,8 @@ function HotStateNavigator() {
         }}
       />
       <Stack.Screen
-        name="Search"
-        component={Search}
+        name="SearchNavigator"
+        component={SearchNavigator}
         options={{
           headerShown: false,
           tabBarLabel: 'Search',
