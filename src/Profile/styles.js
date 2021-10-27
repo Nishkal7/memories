@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     borderRadius: 160 / 2,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: Constants.ALERT_CONFIRM
   },
   singleInfoContainer: {
     height: '15%',

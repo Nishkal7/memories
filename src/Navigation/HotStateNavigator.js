@@ -35,6 +35,7 @@ function HotStateNavigator() {
       <Stack.Screen
         name="SearchNavigator"
         component={SearchNavigator}
+        backBehavior="history"
         options={{
           headerShown: false,
           tabBarLabel: 'Search',
