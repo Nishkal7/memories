@@ -1,16 +1,40 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-} from 'react-native';
+import {Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './styles';
 import {useSelector, useDispatch} from 'react-redux';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const Create = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    message: '',
+    tags: '',
+    selectedFile: '',
+  });
+
+  const options = {
+    title: 'Select Image',
+    includeBase64: true,
+    // customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+  };
+  //data:image/png;base64,iVBORw
+
+  const uploadImage = async () => {
+    // launchImageLibrary(options?, callback)
+    const result = await launchImageLibrary(options);
+    console.log('RESULT', result);
+    if (result?.assets[0]?.base64) {
+      setFormData({
+        ...formData,
+        selectedFile: 'data:image/jpeg;base64,' + result?.assets[0]?.base64,
+      });
+    }
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -23,10 +47,10 @@ const Create = () => {
             name="Title"
             type="text"
             style={styles.boxContainer}
-            // value={formData.email}
-            // onChangeText={value => {
-            //   setFormData({...formData, email: value.trim()});
-            // }}
+            value={formData.title}
+            onChangeText={value => {
+              setFormData({...formData, title: value});
+            }}
           />
         </View>
         <View style={styles.largeInputViewContainer}>
@@ -36,10 +60,10 @@ const Create = () => {
             type="text"
             multiline={true}
             style={styles.largeBoxContainer}
-            // value={formData.email}
-            // onChangeText={value => {
-            //   setFormData({...formData, email: value.trim()});
-            // }}
+            value={formData.message}
+            onChangeText={value => {
+              setFormData({...formData, message: value});
+            }}
           />
         </View>
         <View style={styles.inputViewContainer}>
@@ -47,34 +71,43 @@ const Create = () => {
           <TextInput
             name="Tags"
             type="text"
+            placeholder="Enter Tags (Tag1,Tag2,...)"
             style={styles.boxContainer}
-            // value={formData.email}
-            // onChangeText={value => {
-            //   setFormData({...formData, email: value.trim()});
-            // }}
+            value={formData.tags}
+            onChangeText={value => {
+              setFormData({...formData, tags: value.split(',')});
+            }}
           />
         </View>
-        <View style={styles.inputViewContainer}>
-          <Text style={styles.inputText}>Upload Image</Text>
-          <TextInput
-            name="image"
-            type="text"
-            style={styles.boxContainer}
-            // value={formData.email}
-            // onChangeText={value => {
-            //   setFormData({...formData, email: value.trim()});
-            // }}
-          />
+        <View style={styles.inputViewUploadContainer}>
+          {true ? (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.button}
+              onPress={() => {
+                uploadImage();
+              }}>
+              <Text style={styles.buttonText}>Upload Image</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={[styles.button, {backgroundColor: 'green'}]}
+              onPress={() => {
+                uploadImage();
+              }}>
+              <Text style={styles.buttonText}>Image Uploaded</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.inputViewContainer}>
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.button1}
-            // onPress={() => {
-            //   validateData(formData);
-            // }}
-          >
-            <Text style={styles.buttonText}>Upload Image</Text>
+            onPress={() => {
+              console.log('CHECKING DATA', formData);
+            }}>
+            <Text style={styles.buttonText}>Create Post</Text>
           </TouchableOpacity>
         </View>
       </View>

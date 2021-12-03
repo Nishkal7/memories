@@ -26,6 +26,7 @@ const Home = ({navigation}) => {
   const [bookmark, setBookmark] = useState(false);
 
   useEffect(() => {
+    console.log("stateData",stateData)
     dispatch(getPosts(1));
   }, []);
 

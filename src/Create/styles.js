@@ -27,12 +27,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: "5%",
   },
+  inputViewUploadContainer: {
+    height: '5%',
+    marginHorizontal: 15,
+    justifyContent: 'center',
+    marginVertical: "5%",
+  },
   boxContainer: {
     height: 50,
     borderColor: Constants.APP_THEME_COLOR,
     borderWidth: 1,
     textAlignVertical: "top",
-    // color: Constants.APP_THEME_COLOR,
+    color: Constants.APP_THEME_COLOR,
   },
   largeInputViewContainer: {
     height: '20%',
@@ -45,6 +51,7 @@ const styles = StyleSheet.create({
     borderColor: Constants.APP_THEME_COLOR,
     borderWidth: 1,
     textAlignVertical: "top",
+    color: Constants.APP_THEME_COLOR,
   },
   bodyContainer: {
     flex: 1,
@@ -53,6 +60,15 @@ const styles = StyleSheet.create({
   inputText: {
     color: Constants.APP_THEME_COLOR,
     marginBottom: 10,
+  },
+  button: {
+    height: 35,
+    width: '70%',
+    borderRadius: 20,
+    backgroundColor: Constants.APP_THEME_COLOR,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   button1: {
     height: 35,
