@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import * as Constants from '../utils/Constants';
@@ -14,6 +15,17 @@ function ColdStateNavigator() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const loginStatus = useSelector(state => state?.login?.authData);
 
+  const storeAuthData = async (value) => {
+    console.log("auth data",value)
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@profile', jsonValue)
+    } catch (e) {
+      // saving error
+      console.log("asyncstorage set error",e)
+    }
+  }
+
   useEffect(() => {
     if (
       loginStatus &&
@@ -21,6 +33,7 @@ function ColdStateNavigator() {
       loginStatus?.result &&
       loginStatus?.token
     ) {
+      storeAuthData(loginStatus)
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);

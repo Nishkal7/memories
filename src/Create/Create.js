@@ -3,6 +3,9 @@ import {Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import styles from './styles';
 import {useSelector, useDispatch} from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import AlertModal from '../utils/AlertModal';
+import Loader from '../utils/Loader';
+import * as api from '../api/index';
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +14,8 @@ const Create = () => {
     tags: '',
     selectedFile: '',
   });
+  const [toggleAlert, setToggleAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const options = {
     title: 'Select Image',
@@ -24,19 +29,47 @@ const Create = () => {
   //data:image/png;base64,iVBORw
 
   const uploadImage = async () => {
-    // launchImageLibrary(options?, callback)
     const result = await launchImageLibrary(options);
-    console.log('RESULT', result);
-    if (result?.assets[0]?.base64) {
-      setFormData({
-        ...formData,
-        selectedFile: 'data:image/jpeg;base64,' + result?.assets[0]?.base64,
-      });
+    try {
+      if (result?.assets[0]?.base64) {
+        setFormData({
+          ...formData,
+          selectedFile: 'data:image/jpeg;base64,' + result?.assets[0]?.base64,
+        });
+      }
+    } catch (error) {
+      console.log('Err', error);
+    }
+  };
+
+  const validateData = async () => {
+    if (
+      formData.title.length == 0 ||
+      formData.message.length == 0 ||
+      formData.selectedFile.length == 0 ||
+      formData.tags.length == 0
+    ) {
+      setToggleAlert(true);
+    } else {
+      // setLoading(true);
+      console.log('Publish Data');
+      const data = await api.createPost(formData);
+      console.log('datttt', data);
+      // setFormData({title: '', message: '', tags: '', selectedFile: ''});
+      // setLoading(false);
     }
   };
 
   return (
     <View style={styles.mainContainer}>
+      <Loader activeStatus={loading} />
+      <AlertModal
+        message={'Please enter all the fields'}
+        activeStatus={toggleAlert}
+        closeModal={() => {
+          setToggleAlert(false);
+        }}
+      />
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Create Memory</Text>
       </View>
@@ -96,7 +129,7 @@ const Create = () => {
               onPress={() => {
                 uploadImage();
               }}>
-              <Text style={styles.buttonText}>Image Uploaded</Text>
+              <Text style={styles.buttonText}>Update Image</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -106,6 +139,7 @@ const Create = () => {
             style={styles.button1}
             onPress={() => {
               console.log('CHECKING DATA', formData);
+              validateData();
             }}>
             <Text style={styles.buttonText}>Create Post</Text>
           </TouchableOpacity>

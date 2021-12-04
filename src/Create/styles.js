@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: Constants.APP_THEME_COLOR,
     borderWidth: 1,
-    textAlignVertical: "top",
+    borderRadius: 50/2,
+    paddingLeft:5,
     color: Constants.APP_THEME_COLOR,
   },
   largeInputViewContainer: {
@@ -51,6 +52,8 @@ const styles = StyleSheet.create({
     borderColor: Constants.APP_THEME_COLOR,
     borderWidth: 1,
     textAlignVertical: "top",
+    borderRadius: 80/2,
+    paddingLeft:12,
     color: Constants.APP_THEME_COLOR,
   },
   bodyContainer: {
