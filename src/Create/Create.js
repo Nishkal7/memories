@@ -7,12 +7,14 @@ import AlertModal from '../utils/AlertModal';
 import Loader from '../utils/Loader';
 import * as api from '../api/index';
 
-const Create = () => {
+const Create = ({navigation}) => {
+  let stateData = useSelector(state => state);
   const [formData, setFormData] = useState({
     title: '',
     message: '',
     tags: '',
     selectedFile: '',
+    name: stateData?.login?.authData?.result?.name,
   });
   const [toggleAlert, setToggleAlert] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,6 @@ const Create = () => {
     },
   };
   //data:image/png;base64,iVBORw
-
   const uploadImage = async () => {
     const result = await launchImageLibrary(options);
     try {
@@ -38,7 +39,7 @@ const Create = () => {
         });
       }
     } catch (error) {
-      console.log('Err', error);
+      throw error;
     }
   };
 
@@ -51,12 +52,12 @@ const Create = () => {
     ) {
       setToggleAlert(true);
     } else {
-      // setLoading(true);
-      console.log('Publish Data');
+      setLoading(true);
       const data = await api.createPost(formData);
-      console.log('datttt', data);
-      // setFormData({title: '', message: '', tags: '', selectedFile: ''});
-      // setLoading(false);
+      console.log('data----', data);
+      setFormData({title: '', message: '', tags: '', selectedFile: ''});
+      setLoading(false);
+      navigation.navigate('HomeNavigator', {screen: 'Home'});
     }
   };
 
@@ -113,7 +114,7 @@ const Create = () => {
           />
         </View>
         <View style={styles.inputViewUploadContainer}>
-          {true ? (
+          {!formData.selectedFile.length ? (
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.button}

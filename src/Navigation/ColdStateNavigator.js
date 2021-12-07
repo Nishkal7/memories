@@ -16,13 +16,12 @@ function ColdStateNavigator() {
   const loginStatus = useSelector(state => state?.login?.authData);
 
   const storeAuthData = async (value) => {
-    console.log("auth data",value)
     try {
       const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('@profile', jsonValue)
     } catch (e) {
       // saving error
-      console.log("asyncstorage set error",e)
+      throw e;
     }
   }
 

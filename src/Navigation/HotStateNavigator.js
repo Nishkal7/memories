@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import * as Constants from '../utils/Constants';
 import HomeNavigator from "./HomeNavigator";
 import SearchNavigator from "./SearchNavigator";
+import CreateNavigator from "./CreateNavigator";
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import Create from '../Create/Create';
@@ -49,8 +50,8 @@ function HotStateNavigator() {
         }}
       />
       <Stack.Screen
-        name="Create"
-        component={Create}
+        name="CreateNavigator"
+        component={CreateNavigator}
         options={{
           headerShown: false,
           tabBarLabel: 'Create',
