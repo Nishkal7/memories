@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import * as Constants from '../utils/Constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,7 +16,7 @@ import {getPosts} from '../actions/posts';
 import moment from 'moment';
 import styles from './styles';
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
   const dispatch = useDispatch();
   let stateData = useSelector(state => state); //for checking full global state
   let posts = useSelector(state => state?.posts?.data);
@@ -24,9 +25,19 @@ const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [like, setLike] = useState(false);
   const [bookmark, setBookmark] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  const onRefresh = React.useCallback(() => {
+    dispatch(getPosts(1));
+    setRefreshing(true);
+    wait(5000).then(() => {setRefreshing(false)});
+  }, []);
 
   useEffect(() => {
-    console.log("stateData",stateData)
+    console.log('stateData', stateData);
     dispatch(getPosts(1));
   }, []);
 
@@ -52,7 +63,7 @@ const Home = ({navigation}) => {
         style={styles.cardImageContainer}
         onPress={() =>
           navigation.navigate('PostDetail', {
-            post: item
+            post: item,
           })
         }>
         <ImageBackground
@@ -77,7 +88,7 @@ const Home = ({navigation}) => {
           style={styles.cardContentTitle}
           onPress={() =>
             navigation.navigate('PostDetail', {
-              post: item
+              post: item,
             })
           }>
           <Text numberOfLines={1} style={styles.cardContentTitleText}>
@@ -89,7 +100,7 @@ const Home = ({navigation}) => {
           style={styles.cardContentDesc}
           onPress={() =>
             navigation.navigate('PostDetail', {
-              post: item
+              post: item,
             })
           }>
           <Text numberOfLines={4} style={styles.cardContentDescText}>
@@ -143,6 +154,9 @@ const Home = ({navigation}) => {
         keyExtractor={item => item._id}
         onEndReachedThreshold={0.1}
         onEndReached={posts?.numberOfPages != pageNumber ? loadPosts : null}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </View>
   );
