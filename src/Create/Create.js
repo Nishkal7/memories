@@ -57,7 +57,7 @@ const Create = ({navigation}) => {
       console.log('data----', data);
       setFormData({title: '', message: '', tags: '', selectedFile: ''});
       setLoading(false);
-      navigation.navigate('HomeNavigator', {screen: 'Home'});
+      navigation.navigate('HomeNavigator', {screen: 'Home', params :  {status : "create"}});
     }
   };
 

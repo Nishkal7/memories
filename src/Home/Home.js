@@ -27,14 +27,23 @@ const Home = ({navigation, route}) => {
   const [bookmark, setBookmark] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const wait = (timeout) => {
+  const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
-  }
+  };
   const onRefresh = React.useCallback(() => {
     dispatch(getPosts(1));
     setRefreshing(true);
-    wait(5000).then(() => {setRefreshing(false)});
+    wait(5000).then(() => {
+      setRefreshing(false);
+    });
   }, []);
+
+  useEffect(async () => {
+    if (route?.params?.status == 'create') {
+      await onRefresh();
+      route.params = undefined;
+    }
+  }, [route?.params]);
 
   useEffect(() => {
     console.log('stateData', stateData);
@@ -118,12 +127,12 @@ const Home = ({navigation, route}) => {
               style={{paddingRight: 15}}
               onPress={() => setLike(!like)}
             />
-            <MaterialCommunityIcons
+            {/* <MaterialCommunityIcons
               name={bookmark ? 'bookmark' : 'bookmark-outline'}
               color={'#585858'}
               size={25}
               onPress={() => setBookmark(!bookmark)}
-            />
+            /> */}
           </View>
           <View>
             <MaterialCommunityIcons

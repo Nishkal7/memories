@@ -64,7 +64,7 @@ function HotStateNavigator() {
           ),
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Bookmark"
         component={Bookmark}
         options={{
@@ -78,7 +78,7 @@ function HotStateNavigator() {
             />
           ),
         }}
-      />
+      /> */}
       <Stack.Screen
         name="Profile"
         component={Profile}
