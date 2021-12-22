@@ -13,6 +13,14 @@ const postsReducer = (
       return {...state, isLoading: true};
     case 'DISABLE_LOADING':
       return {...state, isLoading: false};
+    case 'LIKE':
+      console.log("state.data",state.data.data)
+      return {
+        ...state,
+        data: state.data.data.map(post =>
+          post._id === action.payload._id ? action.payload : post,
+        ),
+      };
     default:
       return state;
   }

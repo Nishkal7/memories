@@ -12,7 +12,7 @@ import * as Constants from '../utils/Constants';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../utils/Loader';
-import {getPosts} from '../actions/posts';
+import {getPosts, likePost} from '../actions/posts';
 import moment from 'moment';
 import styles from './styles';
 
@@ -46,15 +46,15 @@ const Home = ({navigation, route}) => {
   }, [route?.params]);
 
   useEffect(() => {
-    console.log('stateData', stateData);
     dispatch(getPosts(1));
+    console.log('stateData', stateData);
   }, []);
 
   useEffect(() => {
     if (posts?.data != null) {
       setLoading(false);
-    } else {
-      setLoading(true);
+      // } else {
+      //   setLoading(true); // commented due to issue after liking any post ( reloading due to Posts local state change)
     }
 
     if (posts?.currentPage == 1) {
@@ -64,6 +64,20 @@ const Home = ({navigation, route}) => {
       setPostsData(postsData);
     }
   }, [posts]);
+
+  function checkSelfLike(post) {
+    let likeBool = post.likes.find(
+      like =>
+        like ===
+        (stateData.login.authData?.result?.googleId ||
+          stateData.login.authData?.result?._id),
+    );
+    return likeBool;
+  }
+
+  const updateLocalLike = (post) => {
+      //TODO - Update like state locally in redux and API call related data can be updated on DATA reload or refresh later
+  }
 
   const renderItem = ({item, index}) => (
     <View style={styles.itemContainer}>
@@ -121,11 +135,16 @@ const Home = ({navigation, route}) => {
               api functional logic is implemented and we can add condition based on post and user information*/}
           <View style={styles.cardContentIconsLeftContainer}>
             <MaterialCommunityIcons
-              name={like ? 'thumb-up' : 'thumb-up-outline'}
+              name={
+                checkSelfLike(item) ? 'thumb-up' : 'thumb-up-outline'
+              }
               color={'#585858'}
               size={25}
               style={{paddingRight: 15}}
-              onPress={() => setLike(!like)}
+              onPress={() => {
+                updateLocalLike(item);
+                dispatch(likePost(item._id));
+              }}
             />
             {/* <MaterialCommunityIcons
               name={bookmark ? 'bookmark' : 'bookmark-outline'}

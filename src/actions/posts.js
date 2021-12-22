@@ -30,3 +30,13 @@ export const getPostsBySearchv2 = searchQuery => async dispatch => {
     dispatch({type: 'GET_REC_POSTS_v2', payload: null});
   }
 };
+
+export const likePost = id => async dispatch => {
+  try {
+    const { data } = await api.likePost(id);
+    dispatch({ type: 'LIKE', payload: data });
+  } catch (error) {
+    console.log("Likes Issue",error);
+    dispatch({ type: 'LIKE', payload: null });
+  }
+};
